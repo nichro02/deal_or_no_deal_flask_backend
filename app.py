@@ -12,9 +12,28 @@ app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
 #instantiate LoginManager and initialize in app from app = Flask(__name__)
-
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 #allow user to be available anywhere in app
+@login_manager.user_loader
+def load_user(player_id):
+    try:
+        return models.Player.get_by_id(player_id)
+    except models.DoesNotExist:
+        return None
+
+@app.before_request
+def before_request():
+    """Connect to the database before each request"""
+    g.db = models.DATABASE
+    g.db.connect()
+
+@app.after_request
+def after_request(response):
+    """Close database connection after each request"""
+    g.db.close()
+    return response
 
 #stub out test route
 @app.route('/')
@@ -22,5 +41,6 @@ def index():
     return 'hello world'
 
 if __name__=='__main__':
+    models.initialize()
     app.run(port=8000, debug=True)
 
