@@ -2,6 +2,7 @@ from flask import Flask, jsonify, g
 from flask_cors import CORS
 from flask_login import LoginManager
 
+from resources.players import players
 
 import models
 
@@ -34,6 +35,10 @@ def after_request(response):
     """Close database connection after each request"""
     g.db.close()
     return response
+
+CORS(players, origins=['http://localhost:3000'], supports_credentials=True)
+
+app.register_blueprint(players, url_prefix='/api/v1/players')
 
 #stub out test route
 @app.route('/')
