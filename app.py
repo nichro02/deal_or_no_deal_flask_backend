@@ -37,7 +37,7 @@ def after_request(response):
     g.db.close()
     return response
 
-CORS(players, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(app, origins=['http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(players, url_prefix='/api/v1/players')
 app.register_blueprint(games, url_prefix='/api/v1/games')

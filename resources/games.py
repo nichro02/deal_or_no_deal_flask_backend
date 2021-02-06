@@ -20,3 +20,17 @@ def post_results():
         return jsonify(data=game_dict, status={'code': 201, 'message': 'game successfully recorded'})
     except models.DoesNotExist:
         return jsonify(data={}, status={'code': 404, 'message': 'Error getting resources'})
+
+#GET TOP 10 HIGH SCORES
+@games.route('/top_scores', methods=['GET'])
+def top_scores():
+    #query database to get all scores, sort in descending order
+    sort_query = models.Game.select().order_by(models.Game.score.desc()).limit(10)
+    #translate results into dictionaries that can be returned to frontend
+    games_to_dict = [model_to_dict(games) for games in sort_query]
+    #remove password
+    for item in games_to_dict:
+        del item['user_id']['password']
+    return jsonify(data=games_to_dict, status={'code': 201, 'message': 'scores returned'})
+
+
