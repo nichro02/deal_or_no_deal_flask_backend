@@ -76,6 +76,7 @@ def update_bio(player_id):
         query = models.Player.update(**payload).where(models.Player.id==player_id)
         query.execute()
         updated_player = model_to_dict(models.Player.get_by_id(player_id))
+        del updated_player['password']
         return jsonify(data=updated_player, status={'code': 200, 'message': 'User successfully updated'})
     except models.DoesNotExist:
         return jsonify(data={}, status={'code': 404,'message': 'Error getting resources'})

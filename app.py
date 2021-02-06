@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_login import LoginManager
 
 from resources.players import players
+from resources.games import games
 
 import models
 
@@ -39,6 +40,8 @@ def after_request(response):
 CORS(players, origins=['http://localhost:3000'], supports_credentials=True)
 
 app.register_blueprint(players, url_prefix='/api/v1/players')
+app.register_blueprint(games, url_prefix='/api/v1/games')
+
 
 #stub out test route
 @app.route('/')
