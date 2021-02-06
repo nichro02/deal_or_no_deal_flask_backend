@@ -38,6 +38,29 @@ def register():
         return jsonify(data=player_dict, status={'code': 201, 'message': 'user created'})
 
 #POST ROUTE TO LOGIN PLAYERS
+@players.route('/login', methods=['POST'])
+def login():
+    payload = request.get_json()
+    #payload['username'].lower()
+
+    try:
+        #check email
+        player = models.Player.get(models.Player.username == payload['username'])
+        print('USER --->', player)
+
+        player_dict = model_to_dict(player)
+
+        #check password
+        if(check_password_hash(player_dict['password'], payload['password'])):
+            del player_dict['password']
+            #start session if password is correct
+            login_user(player)
+            return jsonify(data=player_dict, status={'code': 200, 'message': 'successful login'})
+        else:
+            #send incorrect login info message
+            return jsonify({}, status={'code': 401, 'message': 'incorrect login information provided'})
+    except models.DoesNotExist:
+        return jsonify({}, status={'code': 401, 'message': 'incorrect login information provided'})
 
 #PUT ROUTE TO UPDATE BIO
 
