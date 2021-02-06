@@ -81,3 +81,11 @@ def update_bio(player_id):
         return jsonify(data={}, status={'code': 404,'message': 'Error getting resources'})
 
 #DELETE PLAYER
+@players.route('/<player_id>', methods=['Delete'])
+def delete_player(player_id):
+    try:
+        player_to_delete = models.Player.get_by_id(player_id)
+        player_to_delete.delete_instance()
+        return jsonify(data={}, status={'code': 200, 'message': 'Record successfully deleted'})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={'code': 404,'message': 'Error getting resources'})
