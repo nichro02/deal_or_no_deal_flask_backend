@@ -62,8 +62,12 @@ def login():
     except models.DoesNotExist:
         return jsonify({}, status={'code': 401, 'message': 'incorrect login information provided'})
 
-#PUT ROUTE TO UPDATE BIO
-
 #GET, POST ROUTE TO LOGOUT PLAYERS
+@players.route('/logout', methods=['GET', 'POST'])
+def logout():
+    logout_user()
+    return jsonify(data={}, status={'code': 200, 'message': 'logout successful'})
+
+#PUT ROUTE TO UPDATE BIO
 
 #DELETE PLAYER
