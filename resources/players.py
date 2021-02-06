@@ -68,6 +68,26 @@ def logout():
     logout_user()
     return jsonify(data={}, status={'code': 200, 'message': 'logout successful'})
 
+#GET ROUTE TO RETRIEVE ONE USER
+@players.route('/<player_id>', methods=['GET'])
+def get_one_player(player_id):
+
+    try:
+        #retrieve player
+        get_player = models.Player.get_by_id(player_id)
+        player_dict = model_to_dict(get_player)
+        del player_dict['password']
+        #breakpoint()
+        #retrieve player's games
+        query = models.Game.select(models.Game.id, models.Game.score, models.Game.timestamp).join(models.Player).where(models.Game.user_id == player_id)
+        query_dict = [model_to_dict(q) for q in query]
+        for item in query_dict:
+            del item['user_id']
+        #query = get_player.join(models.Game, on=(models.Game.user_id == models.Player.id))
+        return jsonify(data={'player': player_dict,'games': query_dict}, status={'code': 200, 'message':'player retrieved'})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={'code': 401, 'message': 'error retrieving resources'})
+
 #PUT ROUTE TO UPDATE BIO
 @players.route('/<player_id>', methods=['PUT'])
 def update_bio(player_id):
