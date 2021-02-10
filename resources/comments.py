@@ -48,6 +48,17 @@ def get_user_comments(player_id):
 
 
 #PUT ROUTE TO UPDATE COMMENTS
+@comments.route('/<comment_id>', methods=['PUT'])
+def update_one(comment_id):
+    try:
+        payload = request.get_json()
+        update_comment_query = models.Comment.update(**payload).where(models.Comment.id == comment_id)
+        update_comment_query.execute()
+        updated_comment = model_to_dict(models.Comment.get_by_id(comment_id))
+        del updated_comment['user_id']['password']
+        return jsonify(data=updated_comment, status={'code': 200, 'message': 'Record successfully updated'})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={'code': 404, 'message': 'Error getting resources'})
 
 #DELETE ROUTE
 @comments.route('/<comment_id>', methods=['Delete'])
