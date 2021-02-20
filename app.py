@@ -14,7 +14,7 @@ import models
 app = Flask(__name__)
 
 #handle session secret for login_manager before instantiating login manager
-app.config.from_pyfile('./config.py')
+app.config.from_pyfile('config.py')
 
 #instantiate LoginManager and initialize in app from app = Flask(__name__)
 login_manager = LoginManager()
@@ -58,5 +58,5 @@ if 'ON_HEROKU' in os.environ:
 
 if __name__=='__main__':
     models.initialize()
-    app.run(port=8000, debug=True)
+    app.run(debug=True)
 
