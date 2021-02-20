@@ -1,1 +1,1 @@
-web: gunicorn deal_or_no_deal_flask_backend:app
+web: gunicorn app:app
