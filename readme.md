@@ -24,6 +24,8 @@ The ORM I referred to when writing my backend can be seen below.
 <img 
     src="https://whimsical.com/embed/SCYBNCovAart56WWgh9zLT@2Ux7TurymMreRJ9CTdGZ" 
     alt="Deal or No Deal Flask ORM"
+    width="400"
+    height="225"
 />
 
 # Routes
