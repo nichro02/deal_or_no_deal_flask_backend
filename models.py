@@ -18,7 +18,7 @@ class Player(UserMixin, BaseModel):
     email = CharField(unique=True)
     password = CharField()
     created_at = DateTimeField(default=datetime.datetime.now)
-    bio = CharField()
+    bio = CharField(default='')
 
 #Game Model
 class Game(BaseModel):

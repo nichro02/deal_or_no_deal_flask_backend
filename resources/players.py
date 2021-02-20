@@ -58,9 +58,9 @@ def login():
             return jsonify(data=player_dict, status={'code': 200, 'message': 'successful login'})
         else:
             #send incorrect login info message
-            return jsonify({}, status={'code': 401, 'message': 'incorrect login information provided'})
+            return jsonify(data={}, status={'code': 401, 'message': 'incorrect login information provided'})
     except models.DoesNotExist:
-        return jsonify({}, status={'code': 401, 'message': 'incorrect login information provided'})
+        return jsonify(data={}, status={'code': 401, 'message': 'incorrect login information provided'})
 
 #GET, POST ROUTE TO LOGOUT PLAYERS
 @players.route('/logout', methods=['GET', 'POST'])
@@ -89,7 +89,7 @@ def get_one_player(player_id):
         return jsonify(data={}, status={'code': 401, 'message': 'error retrieving resources'})
 
 #PUT ROUTE TO UPDATE BIO
-@players.route('/<player_id>', methods=['PUT'])
+@players.route('/<player_id>', methods=['PUT', 'OPTIONS'])
 def update_bio(player_id):
     try:
         payload = request.get_json()
