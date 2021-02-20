@@ -14,7 +14,7 @@ import models
 app = Flask(__name__)
 
 #handle session secret for login_manager before instantiating login manager
-app.config.from_pyfile('config.py')
+app.config.from_pyfile('./app/config.py')
 
 #instantiate LoginManager and initialize in app from app = Flask(__name__)
 login_manager = LoginManager()
