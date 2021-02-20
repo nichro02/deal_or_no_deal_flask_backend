@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify, g
 from flask_cors import CORS
 from flask_login import LoginManager
@@ -38,7 +40,7 @@ def after_request(response):
     g.db.close()
     return response
 
-CORS(app, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(app, origins=['http://localhost:3000','https://fierce-lake-32005.herokuapp.com/'], supports_credentials=True)
 
 app.register_blueprint(players, url_prefix='/api/v1/players')
 app.register_blueprint(games, url_prefix='/api/v1/games')
@@ -49,6 +51,10 @@ app.register_blueprint(comments, url_prefix='/api/v1/comments')
 @app.route('/')
 def index():
     return 'hello world'
+
+if 'ON_HEROKU' in os.environ:
+    print('hitting')
+    models.initialize()
 
 if __name__=='__main__':
     models.initialize()

@@ -1,10 +1,15 @@
+import os
+
+from playhouse.db_url import connect
+
 from peewee import *
 from flask_login import UserMixin
 
 import datetime
 
 #link to database
-DATABASE = PostgresqlDatabase('deal_or_no_deal', host='localhost', port=5432)
+#DATABASE = PostgresqlDatabase('deal_or_no_deal', host='localhost', port=5432)
+DATABASE = connect(os.environ.get('DATABASE_URL'))
 
 #instantiate models
 #instantiate base model that specifies database and can be used for subsequent models
