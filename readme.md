@@ -19,14 +19,8 @@ One thing to note: Comments are on the roadmap but that functionality is current
 ## ORM
 - Peewee: I like peewee for its simplicity and ease of use.
 
-The ORM I referred to when writing my backend can be seen below.
+The ORM I referred to when writing my backend can be seen [here](https://whimsical.com/deal-or-no-deal-orm-SCYBNCovAart56WWgh9zLT@2Ux7TurymMreRJ9CTdGZ).
 
-<img 
-    src="https://whimsical.com/embed/SCYBNCovAart56WWgh9zLT@2Ux7TurymMreRJ9CTdGZ" 
-    alt="Deal or No Deal Flask ORM"
-    width="400"
-    height="225"
-/>
 
 # Routes
 Method | URL | Action
