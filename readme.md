@@ -21,7 +21,7 @@ One thing to note: Comments are on the roadmap but that functionality is current
 
 The ORM I referred to when writing my backend can be seen below.
 
-![ORM](<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/SCYBNCovAart56WWgh9zLT@2Ux7TurymMreRJ9CTdGZ"></iframe>)
+<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/SCYBNCovAart56WWgh9zLT@2Ux7TurymMreRJ9CTdGZ"></iframe>
 
 # Routes
 Method | URL | Action
